@@ -1,106 +1,34 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html lang="es">
 <head>
-    <title>Index of /kimagent.github.io</title>
-    <meta name="description" content="Listado de archivos disponibles">
-    <style>
-        body {
-            font-family: monospace;
-            padding: 10px;
-        }
-        h1 {
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        th, td {
-            text-align: left;
-            padding: 4px;
-        }
-        a {
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="description" content="Listado de archivos PDF de Kantar Ibope Media Perú para la ruta /cliente/info. Encuentra informes, estudios y más.">
+    <meta name="keywords" content="Kantar, Ibope, Media, Perú, informes, estudios, PDF, info">
+    <meta http-equiv="content-language" content="es">
+    <title>Archivos PDF - Kantar Ibope Media Perú (https://jklinsman22.github.io/kimagent.github.io)</title>
 </head>
 <body>
-    <h1>Index of /kimagent.github.io</h1>
-    <div id="listing">Cargando...</div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const username = 'jklinsman22';
-            const repo = 'kimagent.github.io';
-            const branch = 'main'; // o 'master' dependiendo de tu repositorio
-            
-            fetch(`https://api.github.com/repos/${username}/${repo}/contents?ref=${branch}`)
-                .then(response => response.json())
-                .then(data => {
-                    const listing = document.getElementById('listing');
-                    
-                    // Filtrar archivos (excluir index.html)
-                    const files = data.filter(item => 
-                        item.name !== 'index.html'
-                    );
-                    
-                    if (files.length === 0) {
-                        listing.textContent = 'No se encontraron archivos.';
-                        return;
-                    }
-                    
-                    // Crear el listado estilo Apache clásico
-                    let html = '<table>\n';
-                    html += '<tr><th>Name</th><th>Size</th></tr>\n';
-                    html += '<tr><th colspan="2"><hr></th></tr>\n';
-                    
-                    // Enlace al directorio padre
-                    html += '<tr><td><a href="https://jklinsman22.github.io/">Parent Directory</a></td><td align="right">-</td></tr>\n';
-                    
-                    // Listar archivos
-                    files.forEach(file => {
-                        const isDirectory = file.type === 'dir';
-                        const fileSize = isDirectory ? '-' : formatFileSize(file.size);
-                        
-                        // Usar raw.githubusercontent.com para archivos que se pueden abrir en el navegador
-                        let fileUrl;
-                        if (isDirectory) {
-                            fileUrl = `${file.name}/`;
-                        } else {
-                            // Usar raw.githubusercontent.com para abrir archivos directamente
-                            fileUrl = `https://raw.githubusercontent.com/${username}/${repo}/${branch}/${file.name}`;
-                        }
-                        
-                        html += `<tr><td><a href="${fileUrl}">${file.name}${isDirectory ? '/' : ''}</a></td><td align="right">${fileSize}</td></tr>\n`;
-                    });
-                    
-                    html += '<tr><th colspan="2"><hr></th></tr>\n';
-                    html += '</table>';
-                    
-                    listing.innerHTML = html;
-                })
-                .catch(error => {
-                    console.error('Error al cargar los archivos:', error);
-                    document.getElementById('listing').textContent = 
-                        'Error al cargar los archivos. Por favor, intenta de nuevo más tarde.';
-                });
-            
-            // Función para formatear el tamaño del archivo
-            function formatFileSize(bytes) {
-                if (bytes === 0) return '0';
-                
-                const k = 1024;
-                const sizes = ['', 'K', 'M', 'G'];
-                const i = Math.floor(Math.log(bytes) / Math.log(k));
-                
-                return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + sizes[i];
-            }
-        });
-    </script>
+    <h1>Index of /cliente/info</h1>
+    <table>
+        <tr><th valign="top">&nbsp;</th><th><a href="?C=N;O=D">Name</a></th><th><a href="?C=M;O=A">Last modified</a></th><th><a href="?C=S;O=A">Size</a></th><th><a href="?C=D;O=A">Description</a></th></tr>
+        <tr><th colspan="5"><hr></th></tr>
+        <tr><td valign="top">&nbsp;</td><td><a href="https://jklinsman22.github.io/kimagent.github.io/">Parent Directory</a></td><td>&nbsp;</td></tr>
+        <tr><td valign="top">&nbsp;</td><td><a href="sitemap.xml">sitemap.xml</a></td><td align="right">17-Feb-2025 15:53</td><td align="right">4 KB</td><td>&nbsp;</td></tr>
+        <tr><td valign="top">&nbsp;</td><td><a href="BingSiteAuth.xml">BingSiteAuth.xml</a></td><td align="right">17-Feb-2025 15:48</td><td align="right">1 KB</td><td>&nbsp;</td></tr>
+        <tr><td valign="top">&nbsp;</td><td><a href="UniversosKIM2025Clientes.pdf">UniversosKIM2025Clientes.pdf</a></td><td align="right">05-Feb-2025 10:06</td><td align="right">134 KB</td><td>&nbsp;</td></tr>
+        <tr><td valign="top">&nbsp;</td><td><a href="ComunicadoApagon.jpg">ComunicadoApagon.jpg</a></td><td align="right">03-Feb-2025 17:28</td><td align="right">836 KB</td><td>&nbsp;</td></tr>
+        <tr><td valign="top">&nbsp;</td><td><a href="UNIVERSOSCOMUNICADO2025.jpg">UNIVERSOSCOMUNICADO2025.jpg</a></td><td align="right">03-Feb-2025 16:19</td><td align="right">460 KB</td><td>&nbsp;</td></tr>
+        <tr><td valign="top">&nbsp;</td><td><a href="CoberturaMonitoreo2025.pdf">CoberturaMonitoreo2025.pdf</a></td><td align="right">31-Jan-2025 13:30</td><td align="right">2,134 KB</td><td>&nbsp;</td></tr>
+        <tr><td valign="top">&nbsp;</td><td><a href="MetodologiaADI.pdf">MetodologiaADI.pdf</a></td><td align="right">31-Jan-2025 13:25</td><td align="right">2,352 KB</td><td>&nbsp;</td></tr>
+        <tr><td valign="top">&nbsp;</td><td><a href="AudienciasTelevisivas.pdf">AudienciasTelevisivas.pdf</a></td><td align="right">15-Jan-2025 16:38</td><td align="right">2,527 KB</td><td>&nbsp;</td></tr>
+        <tr><td valign="top">&nbsp;</td><td><a href="CMAMINFORMATIVO.pdf">CMAMINFORMATIVO.pdf</a></td><td align="right">02-Jan-2025 09:33</td><td align="right">1,194 KB</td><td>&nbsp;</td></tr>
+        <tr><td valign="top">&nbsp;</td><td><a href="UniversosKIM2025Clientes.xlsx">UniversosKIM2025Clientes.xlsx</a></td><td align="right">24-Dec-2024 12:03</td><td align="right">251 KB</td><td>&nbsp;</td></tr>
+        <tr><td valign="top">&nbsp;</td><td><a href="MediaTrendsKIM.pdf">MediaTrendsKIM.pdf</a></td><td align="right">05-Dec-2024 17:09</td><td align="right">8,539 KB</td><td>&nbsp;</td></tr>
+        <tr><td valign="top">&nbsp;</td><td><a href="FichaTecnicaTGI.pdf">FichaTecnicaTGI.pdf</a></td><td align="right">29-Nov-2024 11:34</td><td align="right">1,286 KB</td><td>&nbsp;</td></tr>
+        <tr><td valign="top">&nbsp;</td><td><a href="MetodologiaAudienciasTV.pdf">MetodologiaAudienciasTV.pdf</a></td><td align="right">10-Oct-2024 15:02</td><td align="right">3,286 KB</td><td>&nbsp;</td></tr>
+        <tr><td valign="top">&nbsp;</td><td><a href="MetodologiaTGI.pdf">MetodologiaTGI.pdf</a></td><td align="right">09-Sep-2024 14:34</td><td align="right">1,930 KB</td><td>&nbsp;</td></tr>
+        <tr><td valign="top">&nbsp;</td><td><a href="PerfilHogaresyPersonas2024.pdf">PerfilHogaresyPersonas2024.pdf</a></td><td align="right">02-Apr-2024 12:33</td><td align="right">1,332 KB</td><td>&nbsp;</td></tr>
+        <tr><th colspan="5"><hr></th></tr>
+    </table>
 </body>
 </html>
-
