@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index of /kimagent.github.io</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 10px;
+        }
+        h1 {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        pre {
+            margin: 0;
+            line-height: 1.5;
+        }
+        a {
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Index of /kimagent.github.io</h1>
+    <pre id="listing">Cargando...</pre>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const username = 'jklinsman22';
+            const repo = 'kimagent.github.io';
+            const branch = 'main'; // o 'master' dependiendo de tu repositorio
+            
+            fetch(`https://api.github.com/repos/${username}/${repo}/contents?ref=${branch}`)
+                .then(response => response.json())
+                .then(data => {
+                    const listing = document.getElementById('listing');
+                    
+                    // Filtrar archivos (excluir index.html)
+                    const files = data.filter(item => 
+                        item.name !== 'index.html'
+                    );
+                    
+                    if (files.length === 0) {
+                        listing.textContent = 'No se encontraron archivos.';
+                        return;
+                    }
+                    
+                    // Crear el listado estilo Apache clásico
+                    let html = '';
+                    
+                    // Encabezado de la tabla
+                    html += '<table>\n';
+                    html += '<tr><th>Name</th><th>Last modified</th><th>Size</th><th>Description</th></tr>\n';
+                    html += '<tr><th colspan="4"><hr></th></tr>\n';
+                    
+                    // Enlace al directorio padre
+                    html += '<tr><td><a href="https://jklinsman22.github.io/">Parent Directory</a></td><td>&nbsp;</td><td align="right">-</td><td>&nbsp;</td></tr>\n';
+                    
+                    // Listar archivos
+                    files.forEach(file => {
+                        const isDirectory = file.type === 'dir';
+                        const fileSize = isDirectory ? '-' : formatFileSize(file.size);
+                        const date = new Date().toUTCString(); // Fecha actual como ejemplo
+                        const fileUrl = isDirectory ? 
+                            `${file.name}/` : 
+                            file.download_url;
+                        
+                        html += `<tr><td><a href="${fileUrl}">${file.name}${isDirectory ? '/' : ''}</a></td><td>${date}</td><td align="right">${fileSize}</td><td>&nbsp;</td></tr>\n`;
+                    });
+                    
+                    html += '<tr><th colspan="4"><hr></th></tr>\n';
+                    html += '</table>';
+                    
+                    listing.innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error al cargar los archivos:', error);
+                    document.getElementById('listing').textContent = 
+                        'Error al cargar los archivos. Por favor, intenta de nuevo más tarde.';
+                });
+            
+            // Función para formatear el tamaño del archivo
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0';
+                
+                const k = 1024;
+                const sizes = ['', 'K', 'M', 'G'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + sizes[i];
+            }
+        });
+    </script>
+</body>
+</html>
+
