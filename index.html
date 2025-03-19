@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Index of /kimagent.github.io</title>
+    <meta name="description" content="Listado de archivos disponibles">
     <style>
         body {
             font-family: monospace;
@@ -11,9 +12,13 @@
             font-size: 18px;
             margin-bottom: 20px;
         }
-        pre {
-            margin: 0;
-            line-height: 1.5;
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            text-align: left;
+            padding: 4px;
         }
         a {
             text-decoration: none;
@@ -25,7 +30,7 @@
 </head>
 <body>
     <h1>Index of /kimagent.github.io</h1>
-    <pre id="listing">Cargando...</pre>
+    <div id="listing">Cargando...</div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -49,29 +54,31 @@
                     }
                     
                     // Crear el listado estilo Apache clásico
-                    let html = '';
-                    
-                    // Encabezado de la tabla
-                    html += '<table>\n';
-                    html += '<tr><th>Name</th><th>Last modified</th><th>Size</th><th>Description</th></tr>\n';
-                    html += '<tr><th colspan="4"><hr></th></tr>\n';
+                    let html = '<table>\n';
+                    html += '<tr><th>Name</th><th>Size</th></tr>\n';
+                    html += '<tr><th colspan="2"><hr></th></tr>\n';
                     
                     // Enlace al directorio padre
-                    html += '<tr><td><a href="https://jklinsman22.github.io/">Parent Directory</a></td><td>&nbsp;</td><td align="right">-</td><td>&nbsp;</td></tr>\n';
+                    html += '<tr><td><a href="https://jklinsman22.github.io/">Parent Directory</a></td><td align="right">-</td></tr>\n';
                     
                     // Listar archivos
                     files.forEach(file => {
                         const isDirectory = file.type === 'dir';
                         const fileSize = isDirectory ? '-' : formatFileSize(file.size);
-                        const date = new Date().toUTCString(); // Fecha actual como ejemplo
-                        const fileUrl = isDirectory ? 
-                            `${file.name}/` : 
-                            file.download_url;
                         
-                        html += `<tr><td><a href="${fileUrl}">${file.name}${isDirectory ? '/' : ''}</a></td><td>${date}</td><td align="right">${fileSize}</td><td>&nbsp;</td></tr>\n`;
+                        // Usar raw.githubusercontent.com para archivos que se pueden abrir en el navegador
+                        let fileUrl;
+                        if (isDirectory) {
+                            fileUrl = `${file.name}/`;
+                        } else {
+                            // Usar raw.githubusercontent.com para abrir archivos directamente
+                            fileUrl = `https://raw.githubusercontent.com/${username}/${repo}/${branch}/${file.name}`;
+                        }
+                        
+                        html += `<tr><td><a href="${fileUrl}">${file.name}${isDirectory ? '/' : ''}</a></td><td align="right">${fileSize}</td></tr>\n`;
                     });
                     
-                    html += '<tr><th colspan="4"><hr></th></tr>\n';
+                    html += '<tr><th colspan="2"><hr></th></tr>\n';
                     html += '</table>';
                     
                     listing.innerHTML = html;
